@@ -37,4 +37,61 @@ public class LottoGameTest {
 
         assertThat(lottoGame.getLottoList().size()).isEqualTo(3);
     }
+
+    @Test
+    @DisplayName("정답 로또와 구매한 로또 하나를 비교하여 결과 Enum을 반환한다.")
+    public void getOneLottoResultTest() {
+        lottoGame.createWinningLotto("1, 2, 3, 4, 5, 6", "7");
+        Lotto lotto1 = new Lotto("1, 2, 3, 4, 5, 6");
+        Lotto lotto2 = new Lotto("1, 2, 3, 4, 5, 7");
+        Lotto lotto3 = new Lotto("1, 2, 3, 4, 5, 8");
+        Lotto lotto4 = new Lotto("1, 2, 3, 4, 9, 8");
+        Lotto lotto5 = new Lotto("1, 2, 3, 10, 9, 8");
+        Lotto lotto6 = new Lotto("1, 2, 27, 28, 39, 40");
+
+        assertThat(lottoGame.getOneLottoResult(lotto1)).isEqualTo(LottoEnum.FIRST);
+        assertThat(lottoGame.getOneLottoResult(lotto2)).isEqualTo(LottoEnum.SECOND);
+        assertThat(lottoGame.getOneLottoResult(lotto3)).isEqualTo(LottoEnum.THIRD);
+        assertThat(lottoGame.getOneLottoResult(lotto4)).isEqualTo(LottoEnum.FOURTH);
+        assertThat(lottoGame.getOneLottoResult(lotto5)).isEqualTo(LottoEnum.FIFTH);
+        assertThat(lottoGame.getOneLottoResult(lotto6)).isEqualTo(LottoEnum.OTHER);
+    }
+
+    @Test
+    @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다.")
+    public void getLottoSumTest() {
+        lottoGame.purchaseLotto(2);
+        lottoGame.getLottoList().get(0).setLottoEnum(LottoEnum.FIRST);
+        lottoGame.getLottoList().get(1).setLottoEnum(LottoEnum.THIRD);
+
+        assertThat(lottoGame.getLottoSum()).isEqualTo(2_001_500_000);
+    }
+
+    @Test
+    @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다. (0원)")
+    public void getLottoSumZeroTest() {
+        lottoGame.purchaseLotto(2);
+        lottoGame.getLottoList().get(0).setLottoEnum(LottoEnum.OTHER);
+        lottoGame.getLottoList().get(1).setLottoEnum(LottoEnum.OTHER);
+
+        assertThat(lottoGame.getLottoSum()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("당첨 금액과 구매 수량을 넣으면 수익률을 반환한다.")
+    public void getRateOfReturn() {
+        int winning = 1_500_000;       // 당첨금 150만원
+        lottoGame.purchaseLotto(3); // 로또 3장 구매
+
+        assertThat(lottoGame.getRateOfReturn(winning)).isEqualTo(500.0);
+    }
+
+    @Test
+    @DisplayName("당첨 금액과 구매 수량을 넣으면 수익률을 반환한다. (예시 데이터와 동일)")
+    public void getRateOfReturn1() {
+        int winning = 5_000;       // 당첨금 150만원
+        lottoGame.purchaseLotto(14); // 로또 3장 구매
+
+        assertThat(lottoGame.getRateOfReturn(winning)).isEqualTo(0.35);
+    }
 }
