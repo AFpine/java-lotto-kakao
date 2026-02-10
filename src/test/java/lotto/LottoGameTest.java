@@ -35,32 +35,38 @@ public class LottoGameTest {
     public void purchaseLottoTest() {
         lottoGame.purchaseLotto(3);
 
-        assertThat(lottoGame.getLottoList().size()).isEqualTo(3);
+        assertThat(lottoGame.getLottos().getLottoList().size()).isEqualTo(3);
     }
 
     @Test
     @DisplayName("정답 로또와 구매한 로또 하나를 비교하여 결과 Enum을 반환한다.")
     public void getOneLottoResultTest() {
         lottoGame.createWinningLotto("1, 2, 3, 4, 5, 6", "7");
-        Lotto lotto1 = new Lotto("1, 2, 3, 4, 5, 6");
-        Lotto lotto2 = new Lotto("1, 2, 3, 4, 5, 7");
-        Lotto lotto3 = new Lotto("1, 2, 3, 4, 5, 8");
-        Lotto lotto4 = new Lotto("1, 2, 3, 4, 9, 8");
-        Lotto lotto5 = new Lotto("1, 2, 3, 10, 9, 8");
+        Lotto lotto1 = createFixedLotto(1, 2, 3, 4, 5, 6);
+        Lotto lotto2 = createFixedLotto(1, 2, 3, 4, 5, 7);
+        Lotto lotto3 = createFixedLotto(1, 2, 3, 4, 5, 8);
+        Lotto lotto4 = createFixedLotto(1, 2, 3, 4, 9, 8);
+        Lotto lotto5 = createFixedLotto(1, 2, 3, 10, 9, 8);
 
-        assertThat(lottoGame.getOneLottoResult(lotto1)).isEqualTo(LottoEnum.FIRST);
-        assertThat(lottoGame.getOneLottoResult(lotto2)).isEqualTo(LottoEnum.SECOND);
-        assertThat(lottoGame.getOneLottoResult(lotto3)).isEqualTo(LottoEnum.THIRD);
-        assertThat(lottoGame.getOneLottoResult(lotto4)).isEqualTo(LottoEnum.FOURTH);
-        assertThat(lottoGame.getOneLottoResult(lotto5)).isEqualTo(LottoEnum.FIFTH);
+        lotto1.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto2.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto3.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto4.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto5.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+
+        assertThat(lotto1.getLottoEnum()).isEqualTo(LottoEnum.FIRST);
+        assertThat(lotto2.getLottoEnum()).isEqualTo(LottoEnum.SECOND);
+        assertThat(lotto3.getLottoEnum()).isEqualTo(LottoEnum.THIRD);
+        assertThat(lotto4.getLottoEnum()).isEqualTo(LottoEnum.FOURTH);
+        assertThat(lotto5.getLottoEnum()).isEqualTo(LottoEnum.FIFTH);
     }
 
     @Test
     @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다.")
     public void getLottoSumTest() {
         lottoGame.purchaseLotto(2);
-        lottoGame.getLottoList().get(0).setLottoEnum(LottoEnum.FIRST);
-        lottoGame.getLottoList().get(1).setLottoEnum(LottoEnum.THIRD);
+        lottoGame.getLottos().getLottoList().get(0).setLottoEnum(LottoEnum.FIRST);
+        lottoGame.getLottos().getLottoList().get(1).setLottoEnum(LottoEnum.THIRD);
 
         assertThat(lottoGame.getLottoSum()).isEqualTo(2_001_500_000);
     }
@@ -81,5 +87,14 @@ public class LottoGameTest {
         lottoGame.purchaseLotto(14); // 로또 3장 구매
 
         assertThat(lottoGame.getRateOfReturn(winning)).isEqualTo(0.35);
+    }
+
+    private Lotto createFixedLotto(int... numbers) {
+        Lotto lotto = new Lotto();
+        lotto.getLottoNumbers().getLottoNumberList().clear();
+        for (int number : numbers) {
+            lotto.getLottoNumbers().getLottoNumberList().add(new LottoNumber(number));
+        }
+        return lotto;
     }
 }

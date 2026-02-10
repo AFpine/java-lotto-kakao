@@ -1,7 +1,5 @@
 package lotto;
 
-import level0.InputParser;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,44 +14,20 @@ public class LottoTest {
         Lotto lotto = new Lotto();
 
         assertNotNull(lotto);
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);    // 로또의 lottoNumbers 사이즈가 6인지 검증
+        assertThat(lotto.getLottoNumbers().getLottoNumberList().size()).isEqualTo(6);
     }
 
     @Test
-    @DisplayName("입력받은 숫자 6개를 포함한 한 장의 로또를 생성한다.")
-    public void manualLottoTest() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+    @DisplayName("매칭 수와 보너스 여부에 따라 당첨 등수를 반환한다.")
+    public void calculateLottoEnumTest() {
+        Lotto lotto = new Lotto();
 
-        assertNotNull(lotto);
-        assertThat(lotto.getLottoNumbers().size()).isEqualTo(6);    // 로또의 lottoNumbers 사이즈가 6인지 검증
-    }
-
-    @Test
-    @DisplayName("5개의 숫자만 입력받으면 예외 처리한다.")
-    public void manualLottoFailSizeTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new Lotto("1, 2, 3, 4, 6"));
-        assertThat(runtimeException.getMessage()).isEqualTo("6개의 숫자를 입력해야 합니다.");
-    }
-
-    @Test
-    @DisplayName("숫자가 아닌 값을 입력받으면 예외 처리한다.")
-    public void manualLottoFailNotNumberTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new Lotto("1, 2, 3, c, 5b, 6a"));
-        assertThat(runtimeException.getMessage()).isEqualTo("숫자가 아닙니다.");
-    }
-
-    @Test
-    @DisplayName("1-45 범위를 벗어난 숫자를 입력받으면 예외 처리한다.")
-    public void manualLottoFailRangeTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new Lotto("1, 2, 3, 4, 100, 45"));
-        assertThat(runtimeException.getMessage()).isEqualTo("범위를 벗어난 숫자입니다.");
-    }
-
-    @Test
-    @DisplayName("중복된 숫자를 입력받으면 예외 처리한다.")
-    public void manualLottoFailDistinctTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new Lotto("1, 2, 3, 4, 5, 5"));
-        assertThat(runtimeException.getMessage()).isEqualTo("중복된 숫자입니다.");
+        assertThat(lotto.calculateLottoEnum(6, false)).isEqualTo(LottoEnum.FIRST);
+        assertThat(lotto.calculateLottoEnum(5, true)).isEqualTo(LottoEnum.SECOND);
+        assertThat(lotto.calculateLottoEnum(5, false)).isEqualTo(LottoEnum.THIRD);
+        assertThat(lotto.calculateLottoEnum(4, false)).isEqualTo(LottoEnum.FOURTH);
+        assertThat(lotto.calculateLottoEnum(3, false)).isEqualTo(LottoEnum.FIFTH);
+        assertThat(lotto.calculateLottoEnum(2, false)).isNull();
     }
 
 }
