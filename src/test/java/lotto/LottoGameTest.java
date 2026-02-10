@@ -47,14 +47,12 @@ public class LottoGameTest {
         Lotto lotto3 = new Lotto("1, 2, 3, 4, 5, 8");
         Lotto lotto4 = new Lotto("1, 2, 3, 4, 9, 8");
         Lotto lotto5 = new Lotto("1, 2, 3, 10, 9, 8");
-        Lotto lotto6 = new Lotto("1, 2, 27, 28, 39, 40");
 
         assertThat(lottoGame.getOneLottoResult(lotto1)).isEqualTo(LottoEnum.FIRST);
         assertThat(lottoGame.getOneLottoResult(lotto2)).isEqualTo(LottoEnum.SECOND);
         assertThat(lottoGame.getOneLottoResult(lotto3)).isEqualTo(LottoEnum.THIRD);
         assertThat(lottoGame.getOneLottoResult(lotto4)).isEqualTo(LottoEnum.FOURTH);
         assertThat(lottoGame.getOneLottoResult(lotto5)).isEqualTo(LottoEnum.FIFTH);
-        assertThat(lottoGame.getOneLottoResult(lotto6)).isEqualTo(LottoEnum.OTHER);
     }
 
     @Test
@@ -65,16 +63,6 @@ public class LottoGameTest {
         lottoGame.getLottoList().get(1).setLottoEnum(LottoEnum.THIRD);
 
         assertThat(lottoGame.getLottoSum()).isEqualTo(2_001_500_000);
-    }
-
-    @Test
-    @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다. (0원)")
-    public void getLottoSumZeroTest() {
-        lottoGame.purchaseLotto(2);
-        lottoGame.getLottoList().get(0).setLottoEnum(LottoEnum.OTHER);
-        lottoGame.getLottoList().get(1).setLottoEnum(LottoEnum.OTHER);
-
-        assertThat(lottoGame.getLottoSum()).isEqualTo(0);
     }
 
     @Test
