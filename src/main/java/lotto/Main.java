@@ -16,8 +16,16 @@ public class Main {
         game.purchaseLotto(lottoCount);
         game.printLottoList();
 
-        System.out.println();
+        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
+        String input = scanner.nextLine();
+        System.out.println("보너스 볼을 입력해 주세요.");
+        String bonusInput = scanner.nextLine();
 
+        game.createWinningLotto(input, bonusInput);
+        game.getAllLottoResult();
 
+        System.out.println("\n당첨 통계\n-------------");
+        game.printResult();
+        game.printRateOfReturn();
     }
 }
