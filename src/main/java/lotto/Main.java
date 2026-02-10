@@ -22,7 +22,7 @@ public class Main {
         String bonusInput = scanner.nextLine();
 
         game.createWinningLotto(input, bonusInput);
-        game.getAllLottoResult();
+        game.setAllLottoResult();
 
         System.out.println("\n당첨 통계\n-------------");
         game.printResult();
