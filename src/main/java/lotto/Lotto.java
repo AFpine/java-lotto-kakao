@@ -4,22 +4,16 @@ import java.util.*;
 
 public class Lotto {
     // automatic
-    private List<LottoNumber> lottoNumbers;
+    private LottoNumbers lottoNumbers;
     private LottoEnum lottoEnum;
 
-    public List<LottoNumber> getLottoNumbers() {
+    public LottoNumbers getLottoNumbers() {
         return this.lottoNumbers;
     }
 
     public Lotto() {
         // 유효한 랜덤 숫자 6개를 생성
-        this.lottoNumbers = generateValidRandomNumbers();
-        sortLottoNumbers();
-    }
-
-    public Lotto(String input) {
-        this.lottoNumbers = parseLottoNumbers(input);
-        sortLottoNumbers();
+        this.lottoNumbers = new LottoNumbers();
     }
 
     public LottoEnum getLottoEnum() {
@@ -30,65 +24,41 @@ public class Lotto {
         this.lottoEnum = lottoEnum;
     }
 
-    private List<LottoNumber> generateValidRandomNumbers() {
-        List<LottoNumber> numbers = new ArrayList<>();
-
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(new LottoNumber(i));
-        }
-        Collections.shuffle(numbers);
-        return numbers.subList(0, 6);
-    }
-
-    private void sortLottoNumbers() {
-        Collections.sort(lottoNumbers, new Comparator<LottoNumber>() {
-            @Override
-            public int compare(LottoNumber o1, LottoNumber o2) {
-                return o1.getNumber() - o2.getNumber();
-            }
-        });
-    }
-
     public void printLottoNumbers() {
         // 로또 번호(Integer)만 담긴 리스트로 변환
-        System.out.println(lottoNumbers.stream()
+        System.out.println(lottoNumbers.getLottoNumberList().stream()
                 .map(LottoNumber::getNumber)
                 .toList());
     }
 
-    // 테스트를 위한 메서드
-    private List<LottoNumber> parseLottoNumbers(String input) {
-        List<LottoNumber> numbers = new ArrayList<>();
+    public void setOneLottoResult(WinningLotto winningLotto) {
+        int matchCount = 0;
+        boolean bonusCount = isContainBonusNumber(winningLotto.getBonusNumber().getNumber());
 
-        Set<Integer> usedNumber = new HashSet<>();
-
-        String[] strings = input.split(", ");
-        isValidSize(strings);
-        for (String s : strings) {
-            numbers.add(new LottoNumber(isDistinctNumber(usedNumber, isValidRange(isValidString(s)))));
+        for (LottoNumber lottoNumber : lottoNumbers.getLottoNumberList()) {
+            matchCount += isContainWinningNumber(lottoNumber, winningLotto);
         }
 
-        return numbers;
+        this.lottoEnum = calculateLottoEnum(matchCount, bonusCount);
     }
 
-    private void isValidSize(String[] strings) {
-        if(strings.length != 6) throw new RuntimeException("6개의 숫자를 입력해야 합니다.");
+    public boolean isContainBonusNumber(int bonusNumber) {
+        return lottoNumbers.getLottoNumberList().contains(new LottoNumber(bonusNumber));
     }
 
-    private Integer isValidString(String substring) {
-        if (!substring.matches("^[0-9]*$")) throw new RuntimeException("숫자가 아닙니다.");
-        return Integer.parseInt(substring);
+    public int isContainWinningNumber(LottoNumber lottoNumber, WinningLotto winningLotto) {
+
+        if(winningLotto.getWinningLottoNumbers().getLottoNumberList().contains(lottoNumber)) return 1;
+        return 0;
     }
 
-    private Integer isValidRange(Integer number) {
-        if (number < 1 || number > 45) throw new RuntimeException("범위를 벗어난 숫자입니다.");
-        return number;
+    // 로또의 결과 Enum 반환
+    public LottoEnum calculateLottoEnum(int matchCount, boolean bonusCount) {
+        if(matchCount == 6) return LottoEnum.FIRST;
+        if(matchCount == 5 && bonusCount) return LottoEnum.SECOND;
+        if(matchCount == 5) return LottoEnum.THIRD;
+        if(matchCount == 4) return LottoEnum.FOURTH;
+        if(matchCount == 3) return LottoEnum.FIFTH;
+        return null;
     }
-
-    private Integer isDistinctNumber(Set<Integer> usedNumber, Integer number) {
-        if(usedNumber.contains(number)) throw new RuntimeException("중복된 숫자입니다.");
-        usedNumber.add(number);
-        return number;
-    }
-
 }
