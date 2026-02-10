@@ -45,6 +45,12 @@ public class LottoGame {
         winningLotto.createBonusNumber(bonus);
     }
 
+    public void getAllLottoResult() {
+        for (Lotto lotto : lottoList) {
+            getOneLottoResult(lotto);
+        }
+    }
+
     // 하나의 로또의 결과 반환
     public LottoEnum getOneLottoResult(Lotto lotto) {
         int matchCount = 0;
@@ -68,14 +74,14 @@ public class LottoGame {
         if(matchCount == 5) return LottoEnum.THIRD;
         if(matchCount == 4) return LottoEnum.FOURTH;
         if(matchCount == 3) return LottoEnum.FIFTH;
-        return LottoEnum.OTHER;
+        return null;
     }
 
     // 로또 리스트들의 당첨금 총액 반환
     public int getLottoSum() {
         int sum = 0;
         for (Lotto lotto : lottoList) {
-            sum += (int) lotto.getLottoEnum().getValue();
+            if(lotto.getLottoEnum() != null) sum += (int) lotto.getLottoEnum().getValue();
         }
 
         return sum;
@@ -86,5 +92,29 @@ public class LottoGame {
         double rate = (double) sum / (lottoList.size() * 1000);
         // 100을 곱해서 반올림하고 다시 100.0으로 나눔
         return Math.floor(rate * 100) / 100.0;
+    }
+
+    public int countEnum(LottoEnum lottoEnum) {
+        int count = 0;
+        for (Lotto lotto : lottoList) {
+            if(lotto.getLottoEnum() == lottoEnum) count ++;
+        }
+
+        return count;
+    }
+
+    public void printResult() {
+
+        for (LottoEnum lottoEnum : LottoEnum.values()) {
+            System.out.println(lottoEnum.getDescription() + "(" + lottoEnum.getValue() + "원)- " + countEnum(lottoEnum) + "개");
+        }
+    }
+
+    public void printRateOfReturn() {
+        double rateOfReturn = getRateOfReturn(getLottoSum());
+        System.out.print("총 수익률은 " + rateOfReturn + "입니다.(기준이 1이기 때문에 결과적으로 ");
+
+        if(rateOfReturn < 1.0) System.out.println("손해라는 의미임)");
+        if(rateOfReturn > 1.0) System.out.println("이득이라는 의미임)");
     }
 }
