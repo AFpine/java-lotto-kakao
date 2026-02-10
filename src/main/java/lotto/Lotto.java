@@ -3,9 +3,9 @@ package lotto;
 import java.util.*;
 
 public class Lotto {
-
+    // automatic
     private List<LottoNumber> lottoNumbers;
-    private final Set<Integer> usedNumber = new HashSet<>();
+    private LottoEnum lottoEnum;
 
     public List<LottoNumber> getLottoNumbers() {
         return this.lottoNumbers;
@@ -20,6 +20,14 @@ public class Lotto {
         this.lottoNumbers = parseLottoNumbers(input);
     }
 
+    public LottoEnum getLottoEnum() {
+        return this.lottoEnum;
+    }
+
+    public void setLottoEnum(LottoEnum lottoEnum) {
+        this.lottoEnum = lottoEnum;
+    }
+
     private List<LottoNumber> generateValidRandomNumbers() {
         List<LottoNumber> numbers = new ArrayList<>();
 
@@ -31,13 +39,16 @@ public class Lotto {
         return numbers.subList(0, 6);
     }
 
+    // 테스트를 위한 메서드
     private List<LottoNumber> parseLottoNumbers(String input) {
         List<LottoNumber> numbers = new ArrayList<>();
+
+        Set<Integer> usedNumber = new HashSet<>();
 
         String[] strings = input.split(", ");
         isValidSize(strings);
         for (String s : strings) {
-            numbers.add(new LottoNumber(isDistinctNumber(isValidRange(isValidString(s)))));
+            numbers.add(new LottoNumber(isDistinctNumber(usedNumber, isValidRange(isValidString(s)))));
         }
 
         return numbers;
@@ -57,7 +68,7 @@ public class Lotto {
         return number;
     }
 
-    private Integer isDistinctNumber(Integer number) {
+    private Integer isDistinctNumber(Set<Integer> usedNumber, Integer number) {
         if(usedNumber.contains(number)) throw new RuntimeException("중복된 숫자입니다.");
         usedNumber.add(number);
         return number;
