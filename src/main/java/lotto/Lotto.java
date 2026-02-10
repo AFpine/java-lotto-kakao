@@ -14,10 +14,12 @@ public class Lotto {
     public Lotto() {
         // 유효한 랜덤 숫자 6개를 생성
         this.lottoNumbers = generateValidRandomNumbers();
+        sortLottoNumbers();
     }
 
     public Lotto(String input) {
         this.lottoNumbers = parseLottoNumbers(input);
+        sortLottoNumbers();
     }
 
     public LottoEnum getLottoEnum() {
@@ -35,8 +37,23 @@ public class Lotto {
             numbers.add(new LottoNumber(i));
         }
         Collections.shuffle(numbers);
-
         return numbers.subList(0, 6);
+    }
+
+    private void sortLottoNumbers() {
+        Collections.sort(lottoNumbers, new Comparator<LottoNumber>() {
+            @Override
+            public int compare(LottoNumber o1, LottoNumber o2) {
+                return o1.getNumber() - o2.getNumber();
+            }
+        });
+    }
+
+    public void printLottoNumbers() {
+        // 로또 번호(Integer)만 담긴 리스트로 변환
+        System.out.println(lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .toList());
     }
 
     // 테스트를 위한 메서드

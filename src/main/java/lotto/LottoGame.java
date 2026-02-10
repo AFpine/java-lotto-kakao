@@ -33,6 +33,12 @@ public class LottoGame {
         }
     }
 
+    public void printLottoList() {
+        for (Lotto lotto : lottoList) {
+            lotto.printLottoNumbers();
+        }
+    }
+
     // 당첨 로또 생성
     public void createWinningLotto(String input, String bonus) {
         winningLotto = new WinningLotto(input);
