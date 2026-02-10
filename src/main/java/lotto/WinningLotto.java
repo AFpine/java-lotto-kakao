@@ -2,59 +2,31 @@ package lotto;
 
 import java.util.*;
 
+import static lotto.LottoNumberValidator.*;
+
 public class WinningLotto {
     // manual
-    private List<LottoNumber> lottoNumbers;
+    private WinningLottoNumbers winningLottoNumbers;
     private LottoNumber bonusNumber;
-    private final Set<Integer> usedNumber = new HashSet<>();
 
-    public WinningLotto(String input) {
-        this.lottoNumbers = parseLottoNumbers(input);
+    public WinningLotto(String input, String bonusInput) {
+        this.winningLottoNumbers = new WinningLottoNumbers(input);  // 6개 입력
+        parseBonusNumber(bonusInput); // 보너스 점수 입력
     }
 
-    public List<LottoNumber> getLottoNumbers() {
-        return this.lottoNumbers;
+    public WinningLottoNumbers getWinningLottoNumbers() {
+        return this.winningLottoNumbers;
     }
 
     public LottoNumber getBonusNumber() {
         return this.bonusNumber;
     }
 
-    private List<LottoNumber> parseLottoNumbers(String input) {
-        List<LottoNumber> numbers = new ArrayList<>();
+    public void parseBonusNumber(String input) {
+        validateString(input);
+        validateRange(Integer.parseInt(input));
 
-        String[] strings = input.split(", ");
-        isValidSize(strings);
-        for (String s : strings) {
-            numbers.add(new LottoNumber(isDistinctNumber(isValidRange(isValidString(s)))));
-        }
-
-        return numbers;
+        validateDistinctNumber(this.winningLottoNumbers.getLottoNumberList(), Integer.parseInt(input));
+        bonusNumber = new LottoNumber(Integer.parseInt(input));
     }
-
-    public void createBonusNumber(String input) {
-        Integer bonusInteger = Integer.parseInt(input);
-        bonusNumber = new LottoNumber(isDistinctNumber(bonusInteger));
-    }
-
-    private void isValidSize(String[] strings) {
-        if(strings.length != 6) throw new RuntimeException("6개의 숫자를 입력해야 합니다.");
-    }
-
-    private Integer isValidString(String substring) {
-        if (!substring.matches("^[0-9]*$")) throw new RuntimeException("숫자가 아닙니다.");
-        return Integer.parseInt(substring);
-    }
-
-    private Integer isValidRange(Integer number) {
-        if (number < 1 || number > 45) throw new RuntimeException("범위를 벗어난 숫자입니다.");
-        return number;
-    }
-
-    private Integer isDistinctNumber(Integer number) {
-        if(usedNumber.contains(number)) throw new RuntimeException("중복된 숫자입니다.");
-        usedNumber.add(number);
-        return number;
-    }
-
 }
