@@ -8,11 +8,6 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
     private final Set<Integer> usedNumber = new HashSet<>();
 
-    public WinningLotto() {
-        // 유효한 랜덤 숫자 6개를 생성
-        this.lottoNumbers = generateValidRandomNumbers();
-    }
-
     public WinningLotto(String input) {
         this.lottoNumbers = parseLottoNumbers(input);
     }
@@ -23,17 +18,6 @@ public class WinningLotto {
 
     public LottoNumber getBonusNumber() {
         return this.bonusNumber;
-    }
-
-    private List<LottoNumber> generateValidRandomNumbers() {
-        List<LottoNumber> numbers = new ArrayList<>();
-
-        for (int i = 1; i <= 45; i++) {
-            numbers.add(new LottoNumber(i));
-        }
-        Collections.shuffle(numbers);
-
-        return numbers.subList(0, 6);
     }
 
     private List<LottoNumber> parseLottoNumbers(String input) {
