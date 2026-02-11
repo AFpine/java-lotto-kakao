@@ -29,9 +29,17 @@ public class OutputView {
     // 당첨 결과 출력
     public void printResult(LottoGame lottoGame) {
         System.out.println("\n당첨 통계\n-------------");
-        for (LottoEnum lottoEnum : LottoEnum.values()) {
-            System.out.println(lottoEnum.getDescription() + "(" + lottoEnum.getValue() + "원)- " + lottoGame.getLottos().countEnum(lottoEnum) + "개");
+        for (LottoRank lottoRank : LottoRank.values()) {
+            printResultWithEnum(lottoRank, lottoGame);
         }
+    }
+
+    public void printResultWithEnum(LottoRank lottoRank, LottoGame lottoGame) {
+        if(lottoRank.isMatchBonus()) {
+            System.out.println(lottoRank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + lottoRank.getValue() + "원)- " + lottoGame.getLottos().countEnum(lottoRank) + "개");
+            return;
+        }
+        System.out.println(lottoRank.getCountOfMatch() + "개 일치 (" + lottoRank.getValue() + "원)- " + lottoGame.getLottos().countEnum(lottoRank) + "개");
     }
 
     // 수익률 출력
