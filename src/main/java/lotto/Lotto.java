@@ -5,7 +5,7 @@ import java.util.*;
 public class Lotto {
     // automatic
     private LottoNumbers lottoNumbers;
-    private LottoEnum lottoEnum;
+    private LottoRank lottoRank;
 
     public LottoNumbers getLottoNumbers() {
         return this.lottoNumbers;
@@ -21,12 +21,12 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers(numberList);
     }
 
-    public LottoEnum getLottoEnum() {
-        return this.lottoEnum;
+    public LottoRank getLottoRank() {
+        return this.lottoRank;
     }
 
-    public void setLottoEnum(LottoEnum lottoEnum) {
-        this.lottoEnum = lottoEnum;
+    public void setLottoRank(LottoRank lottoRank) {
+        this.lottoRank = lottoRank;
     }
 
     // 구매한 로또 리스트 반환
@@ -45,7 +45,7 @@ public class Lotto {
             matchCount += isContainWinningNumber(lottoNumber, winningLotto);
         }
 
-        this.lottoEnum = calculateLottoEnum(matchCount, bonusCount);
+        this.lottoRank = calculateLottoRank(matchCount, bonusCount);
     }
 
     public boolean isContainBonusNumber(int bonusNumber) {
@@ -59,12 +59,7 @@ public class Lotto {
     }
 
     // 로또의 결과 Enum 반환
-    public LottoEnum calculateLottoEnum(int matchCount, boolean bonusCount) {
-        if(matchCount == 6) return LottoEnum.FIRST;
-        if(matchCount == 5 && bonusCount) return LottoEnum.SECOND;
-        if(matchCount == 5) return LottoEnum.THIRD;
-        if(matchCount == 4) return LottoEnum.FOURTH;
-        if(matchCount == 3) return LottoEnum.FIFTH;
-        return null;
+    public LottoRank calculateLottoRank(int matchCount, boolean bonusCount) {
+        return LottoRank.valueOf(matchCount, bonusCount);
     }
 }
