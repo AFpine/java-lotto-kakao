@@ -24,11 +24,12 @@ public class Lotto {
         this.lottoEnum = lottoEnum;
     }
 
-    public void printLottoNumbers() {
+    // 구매한 로또 리스트 반환
+    public List<Integer> getLottoNumbersAsList() {
         // 로또 번호(Integer)만 담긴 리스트로 변환
-        System.out.println(lottoNumbers.getLottoNumberList().stream()
+        return lottoNumbers.getLottoNumberList().stream()
                 .map(LottoNumber::getNumber)
-                .toList());
+                .toList();
     }
 
     public void setOneLottoResult(WinningLotto winningLotto) {
