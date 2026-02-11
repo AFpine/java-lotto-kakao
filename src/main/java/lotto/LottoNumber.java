@@ -5,12 +5,17 @@ import java.util.Objects;
 public class LottoNumber {
     private final int number;
 
-    public int getNumber() {
-        return number;
+    private LottoNumber(int number) {
+        this.number = number;
     }
 
-    public LottoNumber(int number) {
-        this.number = number;
+    public static LottoNumber from(int number) {
+        LottoNumberValidator.validateRange(number);
+        return new LottoNumber(number);
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
