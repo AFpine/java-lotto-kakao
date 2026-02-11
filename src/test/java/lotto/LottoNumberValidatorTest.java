@@ -60,8 +60,8 @@ public class LottoNumberValidatorTest {
     @DisplayName("중복되지 않은 숫자는 중복 검증을 통과한다.")
     public void validateDistinctNumberSuccessTest() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        lottoNumberList.add(new LottoNumber(1));
-        lottoNumberList.add(new LottoNumber(2));
+        lottoNumberList.add(LottoNumber.from(1));
+        lottoNumberList.add(LottoNumber.from(2));
 
         assertDoesNotThrow(() -> LottoNumberValidator.validateDistinctNumber(lottoNumberList, 3));
     }
@@ -70,8 +70,8 @@ public class LottoNumberValidatorTest {
     @DisplayName("중복된 숫자면 예외를 반환한다.")
     public void validateDistinctNumberFailTest() {
         List<LottoNumber> lottoNumberList = new ArrayList<>();
-        lottoNumberList.add(new LottoNumber(1));
-        lottoNumberList.add(new LottoNumber(2));
+        lottoNumberList.add(LottoNumber.from(1));
+        lottoNumberList.add(LottoNumber.from(2));
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> LottoNumberValidator.validateDistinctNumber(lottoNumberList, 2));
         assertThat(exception.getMessage()).isEqualTo("로또에 중복된 숫자가 존재합니다.");

@@ -29,12 +29,12 @@ public class LottoNumbersTest {
     public void sortLottoNumberListTest() {
         LottoNumbers lottoNumbers = new LottoNumbers();
         lottoNumbers.getLottoNumberList().clear();
-        lottoNumbers.getLottoNumberList().add(new LottoNumber(9));
-        lottoNumbers.getLottoNumberList().add(new LottoNumber(1));
-        lottoNumbers.getLottoNumberList().add(new LottoNumber(5));
-        lottoNumbers.getLottoNumberList().add(new LottoNumber(3));
-        lottoNumbers.getLottoNumberList().add(new LottoNumber(7));
-        lottoNumbers.getLottoNumberList().add(new LottoNumber(2));
+        lottoNumbers.getLottoNumberList().add(LottoNumber.from(9));
+        lottoNumbers.getLottoNumberList().add(LottoNumber.from(1));
+        lottoNumbers.getLottoNumberList().add(LottoNumber.from(5));
+        lottoNumbers.getLottoNumberList().add(LottoNumber.from(3));
+        lottoNumbers.getLottoNumberList().add(LottoNumber.from(7));
+        lottoNumbers.getLottoNumberList().add(LottoNumber.from(2));
 
         lottoNumbers.sortLottoNumberList();
 
