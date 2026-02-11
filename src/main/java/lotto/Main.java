@@ -1,31 +1,31 @@
 package lotto;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+
+        OutputView outputView = new OutputView();
+        InputView inputView = new InputView();
 
         LottoGame game = new LottoGame();
 
-        System.out.println("구입 금액을 입력해 주세요.");
-
-        int lottoCount = game.calculateLottoCount(Integer.parseInt(scanner.nextLine()));
-        System.out.println(lottoCount + "개를 구매했습니다");
+        outputView.printPurchaseAmountInput();
+        int purchaseAmount = inputView.inputPurchaseAmount();
+        int lottoCount = game.calculateLottoCount(purchaseAmount);
+        outputView.printPurchaseAmount(lottoCount);
 
         game.purchaseLotto(lottoCount);
-        game.printLottoList();
+        outputView.printLottoNumbers(game.getLottoListAsList());
 
-        System.out.println("\n지난 주 당첨 번호를 입력해 주세요.");
-        String input = scanner.nextLine();
-        System.out.println("보너스 볼을 입력해 주세요.");
-        String bonusInput = scanner.nextLine();
+        outputView.printWinningLottoInput();
+        String input = inputView.inputLottoNumber();
+
+        outputView.printBonusNumberInput();
+        String bonusInput = inputView.inputLottoNumber();
 
         game.createWinningLotto(input, bonusInput);
         game.setAllLottoResult();
 
-        System.out.println("\n당첨 통계\n-------------");
-        game.printResult();
-        game.printRateOfReturn();
+        outputView.printResult(game);
+        outputView.printRateOfReturn(game);
     }
 }
