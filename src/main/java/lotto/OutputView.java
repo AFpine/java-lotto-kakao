@@ -40,6 +40,7 @@ public class OutputView {
         System.out.print("총 수익률은 " + rateOfReturn + "입니다.(기준이 1이기 때문에 결과적으로 ");
 
         if(rateOfReturn < 1.0) System.out.println("손해라는 의미임)");
+        if(rateOfReturn == 1.0) System.out.println("본전임 한번 더!)");
         if(rateOfReturn > 1.0) System.out.println("이득이라는 의미임)");
     }
 }
