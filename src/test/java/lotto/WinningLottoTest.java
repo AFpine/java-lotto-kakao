@@ -54,14 +54,14 @@ public class WinningLottoTest {
     @DisplayName("중복된 숫자를 입력받으면 예외 처리한다.")
     public void manualWinningLottoFailDistinctTest() {
         RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 5", "7"));
-        assertThat(runtimeException.getMessage()).isEqualTo("중복된 숫자입니다.");
+        assertThat(runtimeException.getMessage()).isEqualTo("로또에 중복된 숫자가 존재합니다.");
     }
 
     @Test
     @DisplayName("보너스 번호가 당첨 번호와 중복되면 예외 처리한다.")
     public void manualWinningLottoFailDistinctBonusTest() {
         RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", "5"));
-        assertThat(runtimeException.getMessage()).isEqualTo("중복된 숫자입니다.");
+        assertThat(runtimeException.getMessage()).isEqualTo("로또에 보너스와 중복된 숫자가 존재합니다.");
     }
 
 }
