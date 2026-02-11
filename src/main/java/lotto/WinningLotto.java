@@ -29,4 +29,8 @@ public class WinningLotto {
         validateDistinctBonusNumber(this.winningLottoNumbers.getLottoNumberList(), Integer.parseInt(input));
         bonusNumber = LottoNumber.from(Integer.parseInt(input));
     }
+
+    public boolean contains(LottoNumber lottoNumber) {
+        return winningLottoNumbers.getLottoNumberList().contains(lottoNumber);
+    }
 }
