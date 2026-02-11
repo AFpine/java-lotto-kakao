@@ -17,6 +17,10 @@ public class LottoNumberValidator {
     }
 
     public static void validateDistinctNumber(List<LottoNumber> lottoNumberList, Integer number) {
-        if(lottoNumberList.contains(new LottoNumber(number))) throw new RuntimeException("중복된 숫자입니다.");
+        if(lottoNumberList.contains(new LottoNumber(number))) throw new RuntimeException("로또에 중복된 숫자가 존재합니다.");
+    }
+
+    public static void validateDistinctBonusNumber(List<LottoNumber> lottoNumberList, Integer number) {
+        if(lottoNumberList.contains(new LottoNumber(number))) throw new RuntimeException("로또에 보너스와 중복된 숫자가 존재합니다.");
     }
 }
