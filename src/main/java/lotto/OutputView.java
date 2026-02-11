@@ -35,6 +35,8 @@ public class OutputView {
     }
 
     public void printResultWithEnum(LottoRank lottoRank, LottoGame lottoGame) {
+        if(lottoRank == LottoRank.PENDING) return;
+
         if(lottoRank.isMatchBonus()) {
             System.out.println(lottoRank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + lottoRank.getValue() + "원)- " + lottoGame.getLottos().countEnum(lottoRank) + "개");
             return;
