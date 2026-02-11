@@ -24,4 +24,38 @@ public class Lottos {
             lotto.setOneLottoResult(winningLotto);
         }
     }
+
+    // 로또 리스트들의 당첨금 총액 반환
+    public int getLottoSum() {
+        int sum = 0;
+        for (Lotto lotto : lottoList) {
+            if(lotto.getLottoEnum() != null) sum += (int) lotto.getLottoEnum().getValue();
+        }
+
+        return sum;
+    }
+
+    // 수익률 반환
+    public double getRateOfReturn(int sum) {
+        double rate = (double) sum / (lottoList.size() * 1000);
+        // 100을 곱해서 반올림하고 다시 100.0으로 나눔
+        return Math.floor(rate * 100) / 100.0;
+    }
+
+    // 특정 Enum(몇개 당첨인지) 개수 카운트
+    public int countEnum(LottoEnum lottoEnum) {
+        int count = 0;
+        for (Lotto lotto : lottoList) {
+            if(lotto.getLottoEnum() == lottoEnum) count ++;
+        }
+
+        return count;
+    }
+
+    // 로또 구매
+    public void purchaseLotto(int count) {
+        for (int i = 0; i < count; i++) {
+            this.add(new Lotto());
+        }
+    }
 }
