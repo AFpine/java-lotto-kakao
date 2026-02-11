@@ -37,16 +37,16 @@ public class LottosTest {
         lottos.add(thirdRankLotto);
         lottos.setAllLottoResult(winningLotto);
 
-        assertThat(firstRankLotto.getLottoEnum()).isEqualTo(LottoEnum.FIRST);
-        assertThat(thirdRankLotto.getLottoEnum()).isEqualTo(LottoEnum.THIRD);
+        assertThat(firstRankLotto.getLottoRank()).isEqualTo(LottoRank.FIRST);
+        assertThat(thirdRankLotto.getLottoRank()).isEqualTo(LottoRank.THIRD);
     }
 
     @Test
     @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다.")
     public void getLottoSumTest() {
         lottos.purchaseLotto(2);
-        lottos.getLottoList().get(0).setLottoEnum(LottoEnum.FIRST);
-        lottos.getLottoList().get(1).setLottoEnum(LottoEnum.THIRD);
+        lottos.getLottoList().get(0).setLottoRank(LottoRank.FIRST);
+        lottos.getLottoList().get(1).setLottoRank(LottoRank.THIRD);
 
         assertThat(lottos.getLottoSum()).isEqualTo(2_001_500_000);
     }

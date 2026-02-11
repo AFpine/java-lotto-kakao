@@ -19,15 +19,15 @@ public class LottoTest {
 
     @Test
     @DisplayName("매칭 수와 보너스 여부에 따라 당첨 등수를 반환한다.")
-    public void calculateLottoEnumTest() {
+    public void calculateLottoRankTest() {
         Lotto lotto = new Lotto();
 
-        assertThat(lotto.calculateLottoEnum(6, false)).isEqualTo(LottoEnum.FIRST);
-        assertThat(lotto.calculateLottoEnum(5, true)).isEqualTo(LottoEnum.SECOND);
-        assertThat(lotto.calculateLottoEnum(5, false)).isEqualTo(LottoEnum.THIRD);
-        assertThat(lotto.calculateLottoEnum(4, false)).isEqualTo(LottoEnum.FOURTH);
-        assertThat(lotto.calculateLottoEnum(3, false)).isEqualTo(LottoEnum.FIFTH);
-        assertThat(lotto.calculateLottoEnum(2, false)).isNull();
+        assertThat(lotto.calculateLottoRank(6, false)).isEqualTo(LottoRank.FIRST);
+        assertThat(lotto.calculateLottoRank(5, true)).isEqualTo(LottoRank.SECOND);
+        assertThat(lotto.calculateLottoRank(5, false)).isEqualTo(LottoRank.THIRD);
+        assertThat(lotto.calculateLottoRank(4, false)).isEqualTo(LottoRank.FOURTH);
+        assertThat(lotto.calculateLottoRank(3, false)).isEqualTo(LottoRank.FIFTH);
+        assertThat(lotto.calculateLottoRank(2, false)).isNull();
     }
 
 }

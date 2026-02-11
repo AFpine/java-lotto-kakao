@@ -56,10 +56,10 @@ public class LottoGameTest {
         lotto4.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
         lotto5.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
 
-        assertThat(lotto1.getLottoEnum()).isEqualTo(LottoEnum.FIRST);
-        assertThat(lotto2.getLottoEnum()).isEqualTo(LottoEnum.SECOND);
-        assertThat(lotto3.getLottoEnum()).isEqualTo(LottoEnum.THIRD);
-        assertThat(lotto4.getLottoEnum()).isEqualTo(LottoEnum.FOURTH);
-        assertThat(lotto5.getLottoEnum()).isEqualTo(LottoEnum.FIFTH);
+        assertThat(lotto1.getLottoRank()).isEqualTo(LottoRank.FIRST);
+        assertThat(lotto2.getLottoRank()).isEqualTo(LottoRank.SECOND);
+        assertThat(lotto3.getLottoRank()).isEqualTo(LottoRank.THIRD);
+        assertThat(lotto4.getLottoRank()).isEqualTo(LottoRank.FOURTH);
+        assertThat(lotto5.getLottoRank()).isEqualTo(LottoRank.FIFTH);
     }
 }
