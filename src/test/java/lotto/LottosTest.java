@@ -3,6 +3,8 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
@@ -22,8 +24,8 @@ public class LottosTest {
     @DisplayName("당첨 로또를 기준으로 모든 로또 결과를 계산한다.")
     public void setAllLottoResultTest() {
         Lottos lottos = new Lottos();
-        Lotto firstRankLotto = createFixedLotto(1, 2, 3, 4, 5, 6);
-        Lotto thirdRankLotto = createFixedLotto(1, 2, 3, 4, 5, 8);
+        Lotto firstRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto thirdRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 8));
         WinningLotto winningLotto = new WinningLotto("1, 2, 3, 4, 5, 6", "7");
 
         lottos.add(firstRankLotto);
@@ -32,14 +34,5 @@ public class LottosTest {
 
         assertThat(firstRankLotto.getLottoEnum()).isEqualTo(LottoEnum.FIRST);
         assertThat(thirdRankLotto.getLottoEnum()).isEqualTo(LottoEnum.THIRD);
-    }
-
-    private Lotto createFixedLotto(int... numbers) {
-        Lotto lotto = new Lotto();
-        lotto.getLottoNumbers().getLottoNumberList().clear();
-        for (int number : numbers) {
-            lotto.getLottoNumbers().getLottoNumberList().add(new LottoNumber(number));
-        }
-        return lotto;
     }
 }
