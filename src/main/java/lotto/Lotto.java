@@ -49,7 +49,7 @@ public class Lotto {
     }
 
     public boolean isContainBonusNumber(int bonusNumber) {
-        return lottoNumbers.getLottoNumberList().contains(new LottoNumber(bonusNumber));
+        return lottoNumbers.getLottoNumberList().contains(LottoNumber.from(bonusNumber));
     }
 
     public int isContainWinningNumber(LottoNumber lottoNumber, WinningLotto winningLotto) {

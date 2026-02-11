@@ -16,7 +16,7 @@ public class LottoNumbers {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (Integer i : numberList) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(LottoNumber.from(i));
         }
         this.lottoNumberList = numbers;
         sortLottoNumberList();
@@ -30,7 +30,7 @@ public class LottoNumbers {
         List<LottoNumber> numbers = new ArrayList<>();
 
         for (int i = 1; i <= 45; i++) {
-            numbers.add(new LottoNumber(i));
+            numbers.add(LottoNumber.from(i));
         }
         Collections.shuffle(numbers);
 

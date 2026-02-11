@@ -27,7 +27,7 @@ public class WinningLottoNumbers {
             validateString(s);
             validateRange(Integer.parseInt(s));
             validateDistinctNumber(this.lottoNumberList, Integer.parseInt(s));
-            lottoNumberList.add(new LottoNumber(Integer.parseInt(s)));
+            lottoNumberList.add(LottoNumber.from(Integer.parseInt(s)));
         }
     }
 }
