@@ -26,7 +26,7 @@ public class WinningLotto {
         validateString(input);
         validateRange(Integer.parseInt(input));
 
-        validateDistinctNumber(this.winningLottoNumbers.getLottoNumberList(), Integer.parseInt(input));
+        validateDistinctBonusNumber(this.winningLottoNumbers.getLottoNumberList(), Integer.parseInt(input));
         bonusNumber = new LottoNumber(Integer.parseInt(input));
     }
 }
