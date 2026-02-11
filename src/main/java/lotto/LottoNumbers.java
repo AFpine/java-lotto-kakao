@@ -11,6 +11,17 @@ public class LottoNumbers {
         sortLottoNumberList();      // sorting
     }
 
+    // 테스트 용 직접 로또 번호 생성을 위한 생성자
+    public LottoNumbers(List<Integer> numberList) {
+        List<LottoNumber> numbers = new ArrayList<>();
+
+        for (Integer i : numberList) {
+            numbers.add(new LottoNumber(i));
+        }
+        this.lottoNumberList = numbers;
+        sortLottoNumberList();
+    }
+
     public List<LottoNumber> getLottoNumberList() {
         return lottoNumberList;
     }
