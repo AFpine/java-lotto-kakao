@@ -25,8 +25,8 @@ public class LottoNumberValidatorTest {
     public void validateSizeFailTest() {
         String[] numbers = {"1", "2", "3", "4", "5"};
 
-        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> LottoNumberValidator.validateSize(numbers));
-        assertThat(runtimeException.getMessage()).isEqualTo("6개의 숫자를 입력해야 합니다.");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> LottoNumberValidator.validateSize(numbers));
+        assertThat(exception.getMessage()).isEqualTo("6개의 숫자를 입력해야 합니다.");
     }
 
     @Test
@@ -38,8 +38,8 @@ public class LottoNumberValidatorTest {
     @Test
     @DisplayName("숫자가 아닌 문자열이면 예외를 반환한다.")
     public void validateStringFailTest() {
-        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> LottoNumberValidator.validateString("abc"));
-        assertThat(runtimeException.getMessage()).isEqualTo("숫자가 아닙니다.");
+        NumberFormatException exception = assertThrows(NumberFormatException.class, () -> LottoNumberValidator.validateString("abc"));
+        assertThat(exception.getMessage()).isEqualTo("숫자가 아닙니다.");
     }
 
     @Test
@@ -52,8 +52,8 @@ public class LottoNumberValidatorTest {
     @Test
     @DisplayName("범위를 벗어난 숫자면 예외를 반환한다.")
     public void validateRangeFailTest() {
-        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> LottoNumberValidator.validateRange(0));
-        assertThat(runtimeException.getMessage()).isEqualTo("범위를 벗어난 숫자입니다.");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> LottoNumberValidator.validateRange(0));
+        assertThat(exception.getMessage()).isEqualTo("범위를 벗어난 숫자입니다.");
     }
 
     @Test
@@ -73,7 +73,7 @@ public class LottoNumberValidatorTest {
         lottoNumberList.add(new LottoNumber(1));
         lottoNumberList.add(new LottoNumber(2));
 
-        RuntimeException runtimeException = assertThrows(RuntimeException.class, () -> LottoNumberValidator.validateDistinctNumber(lottoNumberList, 2));
-        assertThat(runtimeException.getMessage()).isEqualTo("중복된 숫자입니다.");
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> LottoNumberValidator.validateDistinctNumber(lottoNumberList, 2));
+        assertThat(exception.getMessage()).isEqualTo("로또에 중복된 숫자가 존재합니다.");
     }
 }
