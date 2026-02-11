@@ -3,6 +3,8 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 
+import static lotto.LottoNumberValidator.*;
+
 public class LottoGame {
 
     // 정답 로또
@@ -21,7 +23,7 @@ public class LottoGame {
 
     // 구매 가능한 갯수 반환
     public int calculateLottoCount(int money) {
-        if(money < 1000) throw new RuntimeException("1000원 이상의 금액을 입력해야 합니다.");
+        validatePurchaseMoneyRange(money);
 
         return money / 1000;
     }
@@ -49,6 +51,7 @@ public class LottoGame {
 
     // 모든 로또 결과 설정
     public void setAllLottoResult() {
+        if (winningLotto == null) throw new IllegalStateException("당첨 로또가 설정되지 않았습니다.");
         lottos.setAllLottoResult(winningLotto);
     }
 }
