@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.PERIOD;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LottoTest {
@@ -27,7 +28,7 @@ public class LottoTest {
         assertThat(lotto.calculateLottoRank(5, false)).isEqualTo(LottoRank.THIRD);
         assertThat(lotto.calculateLottoRank(4, false)).isEqualTo(LottoRank.FOURTH);
         assertThat(lotto.calculateLottoRank(3, false)).isEqualTo(LottoRank.FIFTH);
-        assertThat(lotto.calculateLottoRank(2, false)).isNull();
+        assertThat(lotto.calculateLottoRank(2, false)).isEqualTo(LottoRank.PENDING);
     }
 
 }

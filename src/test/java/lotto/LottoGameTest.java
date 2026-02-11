@@ -50,11 +50,11 @@ public class LottoGameTest {
         Lotto lotto4 = new Lotto(List.of(1, 2, 3, 4, 9, 8));
         Lotto lotto5 = new Lotto(List.of(1, 2, 3, 10, 9, 8));
 
-        lotto1.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto2.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto3.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto4.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto5.setOneLottoResult(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto1.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto2.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto3.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto4.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lotto5.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
 
         assertThat(lotto1.getLottoRank()).isEqualTo(LottoRank.FIRST);
         assertThat(lotto2.getLottoRank()).isEqualTo(LottoRank.SECOND);
