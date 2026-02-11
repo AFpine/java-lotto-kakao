@@ -16,6 +16,11 @@ public class Lotto {
         this.lottoNumbers = new LottoNumbers();
     }
 
+    // 테스트 용 직접 로또 번호 생성을 위한 생성자
+    public Lotto(List<Integer> numberList) {
+        this.lottoNumbers = new LottoNumbers(numberList);
+    }
+
     public LottoEnum getLottoEnum() {
         return this.lottoEnum;
     }
