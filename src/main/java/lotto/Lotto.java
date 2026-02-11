@@ -14,6 +14,7 @@ public class Lotto {
     public Lotto() {
         // 유효한 랜덤 숫자 6개를 생성
         this.lottoNumbers = new LottoNumbers();
+        lottoRank = LottoRank.PENDING;
     }
 
     // 테스트 용 직접 로또 번호 생성을 위한 생성자
@@ -25,6 +26,7 @@ public class Lotto {
         return this.lottoRank;
     }
 
+    // 테스트 용 setter
     public void setLottoRank(LottoRank lottoRank) {
         this.lottoRank = lottoRank;
     }
@@ -37,7 +39,7 @@ public class Lotto {
                 .toList();
     }
 
-    public void setOneLottoResult(WinningLotto winningLotto) {
+    public void evaluateRank(WinningLotto winningLotto) {
         int matchCount = 0;
         boolean bonusCount = isContainBonusNumber(winningLotto.getBonusNumber().getNumber());
 

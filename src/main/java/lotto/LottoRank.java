@@ -7,7 +7,8 @@ public enum LottoRank {
     FOURTH(4, false, 50_000),
     THIRD(5, false, 1_500_000),
     SECOND(5, true, 30_000_000),
-    FIRST(6, false, 2_000_000_000);
+    FIRST(6, false, 2_000_000_000),
+    PENDING(0, false, 0);   // 결과와 비교 전 상태
 
     private final int countOfMatch;
     private final boolean matchBonus;
@@ -35,6 +36,6 @@ public enum LottoRank {
         return Arrays.stream(values())
                 .filter(rank -> rank.countOfMatch == countOfMatch && rank.matchBonus == matchBonus)
                 .findFirst()
-                .orElse(null);
+                .orElse(PENDING);
     }
 }

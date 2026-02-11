@@ -21,7 +21,7 @@ public class Lottos {
 
     public void setAllLottoResult(WinningLotto winningLotto) {
         for (Lotto lotto : lottoList) {
-            lotto.setOneLottoResult(winningLotto);
+            lotto.evaluateRank(winningLotto);
         }
     }
 
@@ -29,7 +29,7 @@ public class Lottos {
     public int getLottoSum() {
         int sum = 0;
         for (Lotto lotto : lottoList) {
-            if(lotto.getLottoRank() != null) sum += (int) lotto.getLottoRank().getValue();
+            if(lotto.getLottoRank() != LottoRank.PENDING) sum += (int) lotto.getLottoRank().getValue();
         }
 
         return sum;
