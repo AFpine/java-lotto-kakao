@@ -32,36 +32,36 @@ public class WinningLottoTest {
     @Test
     @DisplayName("5개의 숫자만 입력받으면 예외 처리한다.")
     public void manualWinningLottoFailSizeTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new WinningLotto("1, 2, 3, 4, 6", "7"));
-        assertThat(runtimeException.getMessage()).isEqualTo("6개의 숫자를 입력해야 합니다.");
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new WinningLotto("1, 2, 3, 4, 6", "7"));
+        assertThat(exception.getMessage()).isEqualTo("6개의 숫자를 입력해야 합니다.");
     }
 
     @Test
     @DisplayName("숫자가 아닌 값을 입력받으면 예외 처리한다.")
     public void manualWinningLottoFailNotNumberTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new WinningLotto("1, 2, 3, c, 5b, 6a", "7"));
-        assertThat(runtimeException.getMessage()).isEqualTo("숫자가 아닙니다.");
+        NumberFormatException exception = Assertions.assertThrows(NumberFormatException.class, () -> new WinningLotto("1, 2, 3, c, 5b, 6a", "7"));
+        assertThat(exception.getMessage()).isEqualTo("숫자가 아닙니다.");
     }
 
     @Test
     @DisplayName("1-45 범위를 벗어난 숫자를 입력받으면 예외 처리한다.")
     public void manualWinningLottoFailRangeTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new WinningLotto("1, 2, 3, 4, 100, 45", "7"));
-        assertThat(runtimeException.getMessage()).isEqualTo("범위를 벗어난 숫자입니다.");
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new WinningLotto("1, 2, 3, 4, 100, 45", "7"));
+        assertThat(exception.getMessage()).isEqualTo("범위를 벗어난 숫자입니다.");
     }
 
     @Test
     @DisplayName("중복된 숫자를 입력받으면 예외 처리한다.")
     public void manualWinningLottoFailDistinctTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 5", "7"));
-        assertThat(runtimeException.getMessage()).isEqualTo("로또에 중복된 숫자가 존재합니다.");
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 5", "7"));
+        assertThat(exception.getMessage()).isEqualTo("로또에 중복된 숫자가 존재합니다.");
     }
 
     @Test
     @DisplayName("보너스 번호가 당첨 번호와 중복되면 예외 처리한다.")
     public void manualWinningLottoFailDistinctBonusTest() {
-        RuntimeException runtimeException = Assertions.assertThrows(RuntimeException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", "5"));
-        assertThat(runtimeException.getMessage()).isEqualTo("로또에 보너스와 중복된 숫자가 존재합니다.");
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new WinningLotto("1, 2, 3, 4, 5, 6", "5"));
+        assertThat(exception.getMessage()).isEqualTo("로또에 보너스와 중복된 숫자가 존재합니다.");
     }
 
 }
