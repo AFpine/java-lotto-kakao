@@ -19,7 +19,9 @@ public class LottoNumber {
     }
 
     public static LottoNumber from(int number) {
-        LottoNumberValidator.validateRange(number);
+        if(number < MIN || number > MAX) {
+            throw new IllegalArgumentException("범위를 벗어난 숫자입니다.");
+        }
         return CACHE[number];
     }
 
