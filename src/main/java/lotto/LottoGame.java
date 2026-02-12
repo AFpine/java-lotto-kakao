@@ -25,7 +25,7 @@ public class LottoGame {
     public int calculateLottoCount(int money) {
         validatePurchaseMoneyRange(money);
 
-        return money / 1000;
+        return money / LottoPolicy.LOTTO_PRICE;
     }
 
     // 로또 구매

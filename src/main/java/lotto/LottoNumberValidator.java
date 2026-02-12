@@ -25,6 +25,6 @@ public class LottoNumberValidator {
     }
 
     public static void validatePurchaseMoneyRange(int money) {
-        if(money < 1000) throw new IllegalArgumentException("1000원 이상의 금액을 입력해야 합니다.");
+        if(money < LottoPolicy.LOTTO_PRICE) throw new IllegalArgumentException("1000원 이상의 금액을 입력해야 합니다.");
     }
 }
