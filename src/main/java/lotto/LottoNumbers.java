@@ -23,7 +23,7 @@ public class LottoNumbers {
     }
 
     public List<LottoNumber> getLottoNumberList() {
-        return lottoNumberList;
+        return List.copyOf(lottoNumberList);
     }
 
     private void generateRandomNumbers() {
@@ -37,7 +37,7 @@ public class LottoNumbers {
         this.lottoNumberList = numbers.subList(0, 6);
     }
 
-    public void sortLottoNumberList() {
+    private void sortLottoNumberList() {
         this.lottoNumberList.sort(new Comparator<LottoNumber>() {
             @Override
             public int compare(LottoNumber o1, LottoNumber o2) {

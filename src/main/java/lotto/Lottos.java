@@ -12,7 +12,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottoList() {
-        return lottoList;
+        return List.copyOf(lottoList);
     }
 
     public void add(Lotto lotto) {

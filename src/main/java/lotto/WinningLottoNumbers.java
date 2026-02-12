@@ -20,7 +20,7 @@ public class WinningLottoNumbers {
     }
 
     public List<LottoNumber> getLottoNumberList() {
-        return lottoNumberList;
+        return List.copyOf(lottoNumberList);
     }
 
     public void validateDistinctNumber(List<LottoNumber> lottoNumberList, Integer number) {
