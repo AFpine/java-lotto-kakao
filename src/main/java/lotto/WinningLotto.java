@@ -2,7 +2,8 @@ package lotto;
 
 import java.util.*;
 
-import static lotto.LottoNumberValidator.*;
+import static lotto.LottoNumberParser.parseBonusNumber;
+import static lotto.LottoNumberParser.parseLottoNumbers;
 
 public class WinningLotto {
     // manual
@@ -10,8 +11,9 @@ public class WinningLotto {
     private LottoNumber bonusNumber;
 
     public WinningLotto(String input, String bonusInput) {
-        this.winningLottoNumbers = new WinningLottoNumbers(input);  // 6개 입력
-        parseBonusNumber(bonusInput); // 보너스 점수 입력
+        this.winningLottoNumbers = new WinningLottoNumbers(parseLottoNumbers(input)); // 6개 입력
+        validateDistinctBonusNumber(winningLottoNumbers.getLottoNumberList(), parseBonusNumber(bonusInput));
+        this.bonusNumber = LottoNumber.from(parseBonusNumber(bonusInput)); // 보너스 점수 입력
     }
 
     public WinningLottoNumbers getWinningLottoNumbers() {
@@ -22,15 +24,11 @@ public class WinningLotto {
         return this.bonusNumber;
     }
 
-    public void parseBonusNumber(String input) {
-        validateString(input);
-        validateRange(Integer.parseInt(input));
-
-        validateDistinctBonusNumber(this.winningLottoNumbers.getLottoNumberList(), Integer.parseInt(input));
-        bonusNumber = LottoNumber.from(Integer.parseInt(input));
-    }
-
     public boolean contains(LottoNumber lottoNumber) {
         return winningLottoNumbers.getLottoNumberList().contains(lottoNumber);
+    }
+
+    public void validateDistinctBonusNumber(List<LottoNumber> lottoNumberList, Integer number) {
+        if(lottoNumberList.contains(LottoNumber.from(number))) throw new IllegalArgumentException("로또에 보너스와 중복된 숫자가 존재합니다.");
     }
 }
