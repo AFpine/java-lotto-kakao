@@ -15,7 +15,7 @@ public class LottoTest {
         Lotto lotto = new Lotto();
 
         assertNotNull(lotto);
-        assertThat(lotto.getLottoNumbers().getLottoNumberList().size()).isEqualTo(6);
+        assertThat(lotto.getLottoNumbersAsList()).hasSize(6);
     }
 
     @Test

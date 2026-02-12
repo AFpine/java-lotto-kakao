@@ -25,18 +25,9 @@ public class LottoNumbersTest {
     }
 
     @Test
-    @DisplayName("수동으로 넣은 숫자 목록도 정렬할 수 있다.")
+    @DisplayName("생성자로 넣은 숫자 목록이 정렬된다.")
     public void sortLottoNumberListTest() {
-        LottoNumbers lottoNumbers = new LottoNumbers();
-        lottoNumbers.getLottoNumberList().clear();
-        lottoNumbers.getLottoNumberList().add(LottoNumber.from(9));
-        lottoNumbers.getLottoNumberList().add(LottoNumber.from(1));
-        lottoNumbers.getLottoNumberList().add(LottoNumber.from(5));
-        lottoNumbers.getLottoNumberList().add(LottoNumber.from(3));
-        lottoNumbers.getLottoNumberList().add(LottoNumber.from(7));
-        lottoNumbers.getLottoNumberList().add(LottoNumber.from(2));
-
-        lottoNumbers.sortLottoNumberList();
+        LottoNumbers lottoNumbers = new LottoNumbers(List.of(9, 1, 5, 3, 7, 2));
 
         assertThat(lottoNumbers.getLottoNumberList().stream().map(LottoNumber::getNumber).toList())
                 .containsExactly(1, 2, 3, 5, 7, 9);
