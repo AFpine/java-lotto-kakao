@@ -26,6 +26,10 @@ public class Lotto {
         return this.lottoRank;
     }
 
+    public long getLottoRankValue() {
+        return this.lottoRank.getValue();
+    }
+
     // 테스트 용 setter
     public void setLottoRank(LottoRank lottoRank) {
         this.lottoRank = lottoRank;
