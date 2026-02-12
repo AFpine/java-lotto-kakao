@@ -7,10 +7,6 @@ public class Lotto {
     private LottoNumbers lottoNumbers;
     private LottoRank lottoRank;
 
-    public LottoNumbers getLottoNumbers() {
-        return this.lottoNumbers;
-    }
-
     public Lotto() {
         // 유효한 랜덤 숫자 6개를 생성
         this.lottoNumbers = new LottoNumbers();
@@ -28,11 +24,6 @@ public class Lotto {
 
     public long getLottoRankValue() {
         return this.lottoRank.getValue();
-    }
-
-    // 테스트 용 setter
-    public void setLottoRank(LottoRank lottoRank) {
-        this.lottoRank = lottoRank;
     }
 
     // 구매한 로또 리스트 반환
