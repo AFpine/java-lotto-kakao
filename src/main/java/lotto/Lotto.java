@@ -36,7 +36,7 @@ public class Lotto {
 
     public void evaluateRank(WinningLotto winningLotto) {
         int matchCount = 0;
-        boolean bonusCount = isContainBonusNumber(winningLotto.getBonusNumber().getNumber());
+        boolean bonusCount = isContainBonusNumber(winningLotto.getBonusNumberValue());
 
         for (LottoNumber lottoNumber : lottoNumbers.getLottoNumberList()) {
             matchCount += countMatch(lottoNumber, winningLotto);

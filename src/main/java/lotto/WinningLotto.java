@@ -24,6 +24,10 @@ public class WinningLotto {
         return this.bonusNumber;
     }
 
+    public int getBonusNumberValue() {
+        return this.bonusNumber.getNumber();
+    }
+
     public boolean contains(LottoNumber lottoNumber) {
         return winningLottoNumbers.getLottoNumberList().contains(lottoNumber);
     }
