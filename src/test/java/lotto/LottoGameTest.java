@@ -22,14 +22,21 @@ public class LottoGameTest {
     @Test
     @DisplayName("로또 구매 금액을 전달하면 구매할 수 있는 로또 장수를 반환한다.")
     public void calculateLottoCountTest() {
-        Assertions.assertThat(lottoGame.calculateLottoCount(1500)).isEqualTo(1);
+        Assertions.assertThat(lottoGame.calculateTotalLottoCount(1500)).isEqualTo(1);
     }
 
     @Test
     @DisplayName("로또 구매 금액이 1000원 미만이면 예외를 반환한다.")
     public void calculateLottoCountExceptionTest() {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> lottoGame.calculateLottoCount(500));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> lottoGame.calculateTotalLottoCount(500));
         assertThat(exception.getMessage()).isEqualTo("1000원 이상의 금액을 입력해야 합니다.");
+    }
+
+    @Test
+    @DisplayName("")
+    public void calculateManualLottoCountExceptionTest() {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> lottoGame.calculateManualLottoCount(3, 4));
+        assertThat(exception.getMessage()).isEqualTo("구입한 로또 수 만큼만 수동으로 구매할 수 있습니다.");
     }
 
     @Test
@@ -38,6 +45,14 @@ public class LottoGameTest {
         lottoGame.purchaseLotto(3);
 
         assertThat(lottoGame.getLottos().getLottoList().size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("수동으로 로또를 구매하면 리스트를 반환한다.")
+    public void purchaseManualLottoTest() {
+        lottoGame.purchaseManualLotto("1, 2, 3, 4, 5, 6");
+
+        assertThat(lottoGame.getLottos().getLottoList().size()).isEqualTo(1);
     }
 
     @Test
