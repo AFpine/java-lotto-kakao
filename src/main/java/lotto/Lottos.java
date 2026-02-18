@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.LottoNumberParser.parseLottoNumbers;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +54,10 @@ public class Lottos {
         return count;
     }
 
-    // 로또 구매
+    public void purchaseOneManualLotto(String input) {
+        this.add(new Lotto(parseLottoNumbers(input)));
+    }
+
     public void purchaseLotto(int count) {
         for (int i = 0; i < count; i++) {
             this.add(new Lotto());
