@@ -13,9 +13,8 @@ public class Lotto {
         lottoRank = LottoRank.PENDING;
     }
 
-    // 테스트 용 직접 로또 번호 생성을 위한 생성자
-    public Lotto(List<Integer> numberList) {
-        this.lottoNumbers = new LottoNumbers(numberList);
+    public Lotto(List<Integer> numbers) {
+        this.lottoNumbers = new LottoNumbers(numbers);
     }
 
     public LottoRank getLottoRank() {
