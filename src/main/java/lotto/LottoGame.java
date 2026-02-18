@@ -20,14 +20,23 @@ public class LottoGame {
     }
 
     // 구매 가능한 갯수 반환
-    public int calculateLottoCount(int money) {
+    public int calculateTotalLottoCount(int money) {
         validatePurchaseMoneyRange(money);
         return money / LottoPolicy.LOTTO_PRICE;
+    }
+
+    public int calculateManualLottoCount(int totalCount, int manualCount) {
+        validatePurchaseMoneyRange(totalCount, manualCount);
+        return manualCount;
     }
 
     // 로또 구매
     public void purchaseLotto(int count) {
         lottos.purchaseLotto(count);
+    }
+
+    public void purchaseManualLotto(String input) {
+        lottos.purchaseOneManualLotto(input);
     }
 
     // 구매한 로또 출력
@@ -54,5 +63,9 @@ public class LottoGame {
 
     public void validatePurchaseMoneyRange(int money) {
         if(money < LottoPolicy.LOTTO_PRICE) throw new IllegalArgumentException("1000원 이상의 금액을 입력해야 합니다.");
+    }
+
+    public void validatePurchaseMoneyRange(int totalCount, int manualCount) {
+        if(totalCount < manualCount) throw new IllegalArgumentException("구입한 로또 수 만큼만 수동으로 구매할 수 있습니다.");
     }
 }
