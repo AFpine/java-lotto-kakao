@@ -34,9 +34,10 @@ public class Main {
         String bonusInput = inputView.inputLottoNumber();
 
         game.createWinningLotto(input, bonusInput);
-        game.setAllLottoResult();
 
-        outputView.printResult(game);
-        outputView.printRateOfReturn(game);
+        GameResult gameResult = game.generateGameResult();
+
+        outputView.printResult(gameResult);
+        outputView.printRateOfReturn(gameResult);
     }
 }
