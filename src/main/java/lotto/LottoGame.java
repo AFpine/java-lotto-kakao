@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoGame {
-
-    // 정답 로또
     private WinningLotto winningLotto;
-
-    // 구매 로또 리스트
     private Lottos lottos;
 
     public LottoGame() {
@@ -31,8 +27,8 @@ public class LottoGame {
     }
 
     // 로또 구매
-    public void purchaseLotto(int count) {
-        lottos.purchaseLotto(count);
+    public void purchaseLotto(int count, LottoNumberStrategy strategy) {
+        lottos.purchaseLotto(count, strategy);
     }
 
     public void purchaseManualLotto(String input) {
