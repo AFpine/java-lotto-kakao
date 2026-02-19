@@ -34,27 +34,26 @@ public class OutputView {
         }
     }
 
-    // 당첨 결과 출력
-    public void printResult(LottoGame lottoGame) {
+    public void printResult(GameResult gameResult) {
         System.out.println("\n당첨 통계\n-------------");
         for (LottoRank lottoRank : LottoRank.values()) {
-            printResultWithEnum(lottoRank, lottoGame);
+            printResultWithEnum(gameResult, lottoRank);
         }
     }
 
-    public void printResultWithEnum(LottoRank lottoRank, LottoGame lottoGame) {
+    public void printResultWithEnum(GameResult gameResult, LottoRank lottoRank) {
         if(lottoRank == LottoRank.PENDING) return;
 
         if(lottoRank.isMatchBonus()) {
-            System.out.println(lottoRank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + lottoRank.getValue() + "원)- " + lottoGame.getLottos().countEnum(lottoRank) + "개");
+            System.out.println(lottoRank.getCountOfMatch() + "개 일치, 보너스 볼 일치(" + lottoRank.getValue() + "원)- " + gameResult.countEnum(lottoRank) + "개");
             return;
         }
-        System.out.println(lottoRank.getCountOfMatch() + "개 일치 (" + lottoRank.getValue() + "원)- " + lottoGame.getLottos().countEnum(lottoRank) + "개");
+        System.out.println(lottoRank.getCountOfMatch() + "개 일치 (" + lottoRank.getValue() + "원)- " + gameResult.countEnum(lottoRank) + "개");
     }
 
     // 수익률 출력
-    public void printRateOfReturn(LottoGame lottoGame) {
-        double rateOfReturn = lottoGame.getLottos().getRateOfReturn(lottoGame.getLottos().getLottoSum());
+    public void printRateOfReturn(GameResult gameResult) {
+        double rateOfReturn = gameResult.getRateOfReturn();
         System.out.print("총 수익률은 " + rateOfReturn + "입니다.(기준이 1이기 때문에 결과적으로 ");
 
         if(rateOfReturn < 1.0) System.out.println("손해라는 의미임)");
