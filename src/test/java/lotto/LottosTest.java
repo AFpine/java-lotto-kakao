@@ -20,8 +20,8 @@ public class LottosTest {
     @Test
     @DisplayName("로또를 추가하면 목록에 저장한다.")
     public void addLottoTest() {
-        lottos.add(new Lotto());
-        lottos.add(new Lotto());
+        lottos.add(new Lotto(List.of(1, 2, 3, 4, 5, 6)));
+        lottos.add(new Lotto(List.of(7, 8, 9, 10, 11, 12)));
 
         assertThat(lottos.getLottoList()).hasSize(2);
     }

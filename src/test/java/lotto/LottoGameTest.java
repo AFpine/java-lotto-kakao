@@ -42,7 +42,7 @@ public class LottoGameTest {
     @Test
     @DisplayName("구매 가능 장수를 넣으면 그에 맞는 사이즈의 로또 리스트를 반환한다.")
     public void purchaseLottoTest() {
-        lottoGame.purchaseLotto(3);
+        lottoGame.purchaseLotto(3, () -> List.of(1, 2, 3, 4, 5, 6));
 
         assertThat(lottoGame.getLottos().getLottoList().size()).isEqualTo(3);
     }
