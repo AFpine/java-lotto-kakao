@@ -23,7 +23,7 @@ public class Main {
 
         outputView.printPurchaseAmount(manualLottoCount, totalLottoCount);
 
-        game.purchaseLotto(totalLottoCount - manualLottoCount);
+        game.purchaseLotto(totalLottoCount - manualLottoCount, new RandomLottoNumberStrategy());
 
         outputView.printLottoNumbers(game.getLottoListAsList());
 
