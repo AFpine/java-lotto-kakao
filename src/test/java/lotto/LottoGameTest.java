@@ -33,7 +33,7 @@ public class LottoGameTest {
     }
 
     @Test
-    @DisplayName("")
+    @DisplayName("수동으로 구해마는 로또 수가 구입한 로또 수 보다 크면 예외를 반환한다.")
     public void calculateManualLottoCountExceptionTest() {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> lottoGame.calculateManualLottoCount(3, 4));
         assertThat(exception.getMessage()).isEqualTo("구입한 로또 수 만큼만 수동으로 구매할 수 있습니다.");
@@ -65,16 +65,45 @@ public class LottoGameTest {
         Lotto lotto4 = new Lotto(List.of(1, 2, 3, 4, 9, 8));
         Lotto lotto5 = new Lotto(List.of(1, 2, 3, 10, 9, 8));
 
-        lotto1.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto2.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto3.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto4.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
-        lotto5.evaluateRank(new WinningLotto("1, 2, 3, 4, 5, 6", "7"));
+        lottoGame.getLottos().add(lotto1);
+        lottoGame.getLottos().add(lotto2);
+        lottoGame.getLottos().add(lotto3);
+        lottoGame.getLottos().add(lotto4);
+        lottoGame.getLottos().add(lotto5);
+        GameResult gameResult = lottoGame.generateGameResult();
 
-        assertThat(lotto1.getLottoRank()).isEqualTo(LottoRank.FIRST);
-        assertThat(lotto2.getLottoRank()).isEqualTo(LottoRank.SECOND);
-        assertThat(lotto3.getLottoRank()).isEqualTo(LottoRank.THIRD);
-        assertThat(lotto4.getLottoRank()).isEqualTo(LottoRank.FOURTH);
-        assertThat(lotto5.getLottoRank()).isEqualTo(LottoRank.FIFTH);
+        assertThat(gameResult.countEnum(LottoRank.FIRST)).isEqualTo(1);
+        assertThat(gameResult.countEnum(LottoRank.SECOND)).isEqualTo(1);
+        assertThat(gameResult.countEnum(LottoRank.THIRD)).isEqualTo(1);
+        assertThat(gameResult.countEnum(LottoRank.FOURTH)).isEqualTo(1);
+        assertThat(gameResult.countEnum(LottoRank.FIFTH)).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("당첨 결과를 입력하면 당첨금 총액을 반환한다.")
+    public void getLottoSumTest() {
+        Lotto firstRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto thirdRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 8));
+
+        lottoGame.createWinningLotto("1, 2, 3, 4, 5, 6", "7");
+        lottoGame.getLottos().add(firstRankLotto);
+        lottoGame.getLottos().add(thirdRankLotto);
+        GameResult gameResult = lottoGame.generateGameResult();
+
+        assertThat(gameResult.getLottoSum()).isEqualTo(2_001_500_000);
+    }
+
+    @Test
+    @DisplayName("당첨 금액과 구매 수량을 넣으면 수익률을 반환한다.")
+    public void getRateOfReturn() {
+        Lotto firstRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto thirdRankLotto = new Lotto(List.of(1, 2, 3, 4, 5, 8));
+
+        lottoGame.createWinningLotto("1, 2, 3, 4, 8, 9", "10");
+        lottoGame.getLottos().add(firstRankLotto);
+        lottoGame.getLottos().add(thirdRankLotto);
+        GameResult gameResult = lottoGame.generateGameResult();
+
+        assertThat(gameResult.getRateOfReturn()).isEqualTo(775.0);
     }
 }
