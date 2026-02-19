@@ -6,10 +6,6 @@ public class LottoNumbers {
 
     private List<LottoNumber> lottoNumberList;
 
-    public LottoNumbers() {
-        generateRandomNumbers();    // 랜덤 6개 숫자 생성
-        sortLottoNumberList();      // sorting
-    }
 
     public LottoNumbers(List<Integer> numbers) {
         validateSize(numbers);
