@@ -31,9 +31,9 @@ public class Lottos {
         this.add(new Lotto(parseLottoNumbers(input)));
     }
 
-    public void purchaseLotto(int count) {
+    public void purchaseLotto(int count, LottoNumberStrategy strategy) {
         for (int i = 0; i < count; i++) {
-            this.add(new Lotto());
+            this.add(new Lotto(strategy.generate()));
         }
     }
 }
