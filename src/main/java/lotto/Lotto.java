@@ -6,11 +6,6 @@ public class Lotto {
     // automatic
     private LottoNumbers lottoNumbers;
 
-    public Lotto() {
-        // 유효한 랜덤 숫자 6개를 생성
-        this.lottoNumbers = new LottoNumbers();
-    }
-
     public Lotto(List<Integer> numbers) {
         this.lottoNumbers = new LottoNumbers(numbers);
     }
