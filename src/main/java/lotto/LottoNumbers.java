@@ -46,6 +46,10 @@ public class LottoNumbers {
             }
         });
     }
+    
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumberList.contains(lottoNumber);
+    }
 
     public void validateDistinctNumber(List<LottoNumber> lottoNumberList, Integer number) {
         if(lottoNumberList == null) return;

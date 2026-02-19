@@ -25,17 +25,13 @@ public class Lotto {
 
     public LottoRank evaluateRank(WinningLotto winningLotto) {
         int matchCount = 0;
-        boolean bonusCount = isContainBonusNumber(winningLotto.getBonusNumberValue());
+        boolean bonusCount = winningLotto.isContainBonusNumber(lottoNumbers);
 
         for (LottoNumber lottoNumber : lottoNumbers.getLottoNumberList()) {
             matchCount += countMatch(lottoNumber, winningLotto);
         }
 
         return calculateLottoRank(matchCount, bonusCount);
-    }
-
-    public boolean isContainBonusNumber(int bonusNumber) {
-        return lottoNumbers.getLottoNumberList().contains(LottoNumber.from(bonusNumber));
     }
 
     public int countMatch(LottoNumber lottoNumber, WinningLotto winningLotto) {

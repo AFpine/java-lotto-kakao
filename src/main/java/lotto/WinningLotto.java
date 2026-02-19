@@ -32,6 +32,10 @@ public class WinningLotto {
         return winningLottoNumbers.getLottoNumberList().contains(lottoNumber);
     }
 
+    public boolean isContainBonusNumber(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
+    }
+
     public void validateDistinctBonusNumber(List<LottoNumber> lottoNumberList, Integer number) {
         if(lottoNumberList.contains(LottoNumber.from(number))) throw new IllegalArgumentException("로또에 보너스와 중복된 숫자가 존재합니다.");
     }
