@@ -56,9 +56,12 @@ public class LottoGame {
     }
 
     // 모든 로또 결과 설정
-    public void setAllLottoResult() {
+    public GameResult generateGameResult() {
         if (winningLotto == null) throw new IllegalStateException("당첨 로또가 설정되지 않았습니다.");
-        lottos.setAllLottoResult(winningLotto);
+
+        GameResult gameResult = new GameResult();
+        lottos.setAllLottoResult(gameResult, winningLotto);
+        return gameResult;
     }
 
     public void validatePurchaseMoneyRange(int money) {
